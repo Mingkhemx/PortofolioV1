@@ -81,7 +81,7 @@ const WORDS = ["Network & Telecom Student", "Tech Enthusiast", "UI/UX Designer"]
 const TECH_STACK = ["Java", "Javascript", "Node.js", "Lua", "Python", "R", "HTML"];
 const SOCIAL_LINKS = [
   { icon: Github, link: "https://github.com/Mingkhemx" },
-  { icon: Linkedin, link: "https://www.linkedin.com/in/migwara/" },
+  { icon: Linkedin, link: "https://www.linkedin.com/in/MuhammadRifkiApreliant/" },
   { icon: Instagram, link: "https://www.instagram.com/_rippkiiii/?hl=id" }
 ];
 
