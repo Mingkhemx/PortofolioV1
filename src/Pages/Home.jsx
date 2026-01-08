@@ -41,22 +41,22 @@ const MainTitle = memo(() => (
 ));
 
 const TechStack = memo(({ tech }) => (
-  <div className="px-4 py-2 hidden sm:block rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-sm text-gray-300 hover:bg-white/10 transition-colors">
+  <div className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-xs sm:text-sm text-gray-300 hover:bg-white/10 transition-colors">
     {tech}
   </div>
 ));
 
 const CTAButton = memo(({ href, text, icon: Icon }) => (
   <a href={href}>
-    <button className="group relative w-[160px]">
+    <button className="group relative w-[140px] sm:w-[160px]">
       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#4f52c9] to-[#8644c5] rounded-xl opacity-50 blur-md group-hover:opacity-90 transition-all duration-700"></div>
-      <div className="relative h-11 bg-[#030014] backdrop-blur-xl rounded-lg border border-white/10 leading-none overflow-hidden">
+      <div className="relative h-9 sm:h-11 bg-[#030014] backdrop-blur-xl rounded-lg border border-white/10 leading-none overflow-hidden">
         <div className="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-gradient-to-r from-[#4f52c9]/20 to-[#8644c5]/20"></div>
-        <span className="absolute inset-0 flex items-center justify-center gap-2 text-sm group-hover:gap-3 transition-all duration-300">
+        <span className="absolute inset-0 flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm group-hover:gap-2 sm:group-hover:gap-3 transition-all duration-300">
           <span className="bg-gradient-to-r from-gray-200 to-white bg-clip-text text-transparent font-medium z-10">
             {text}
           </span>
-          <Icon className={`w-4 h-4 text-gray-200 ${text === 'Contact' ? 'group-hover:translate-x-1' : 'group-hover:rotate-45'} transform transition-all duration-300 z-10`} />
+          <Icon className={`w-3 h-3 sm:w-4 sm:h-4 text-gray-200 ${text === 'Contact' ? 'group-hover:translate-x-1' : 'group-hover:rotate-45'} transform transition-all duration-300 z-10`} />
         </span>
       </div>
     </button>
@@ -93,6 +93,7 @@ const Home = () => {
   const [charIndex, setCharIndex] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
+  const [lottieError, setLottieError] = useState(false)
 
   // Optimize AOS initialization
   useEffect(() => {
@@ -142,20 +143,26 @@ const Home = () => {
     return () => clearTimeout(timeout);
   }, [handleTyping]);
 
-  // Lottie configuration
+  // Lottie configuration - Using local file for better reliability
   const lottieOptions = {
-    src: "https://lottie.host/58753882-bb6a-49f5-a2c0-950eda1e135a/NLbpVqGegK.lottie",
+    src: "/Lottie.json",
     loop: true,
     autoplay: true,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-      progressiveLoad: true,
+    speed: 1,
+    style: {
+      width: "100%",
+      height: "100%",
+      objectFit: "contain"
     },
-    style: { width: "100%", height: "100%" },
-    className: `w-full h-full transition-all duration-500 ${isHovering
-      ? "scale-[160%] sm:scale-[150%] lg:scale-[135%] xl:scale-[130%] rotate-2"
-      : "scale-[155%] sm:scale-[145%] lg:scale-[130%] xl:scale-[125%]"
-      }`
+    className: `transition-all duration-500`,
+    onLoadError: () => {
+      console.error("Failed to load Lottie animation from /Lottie.json");
+      setLottieError(true);
+    },
+    onLoad: () => {
+      console.log("Lottie animation loaded successfully from /Lottie.json");
+      setLottieError(false);
+    }
   };
 
 
@@ -165,7 +172,7 @@ const Home = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 min-h-screen">
           <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between min-h-screen py-6 sm:py-12 lg:py-20 gap-4 sm:gap-6 lg:gap-10 xl:gap-16">
             {/* Left Column */}
-            <div className="w-full lg:w-[48%] xl:w-[45%] space-y-3 sm:space-y-5 lg:space-y-7 text-left order-2 lg:order-1"
+            <div className="w-full lg:w-[48%] xl:w-[45%] space-y-3 sm:space-y-5 lg:space-y-7 text-left order-1 lg:order-1"
               data-aos="fade-right"
               data-aos-delay="200">
               <div className="space-y-3 sm:space-y-4 lg:space-y-6">
@@ -201,7 +208,7 @@ const Home = () => {
                 </div>
 
                 {/* Social Links */}
-                <div className="hidden sm:flex gap-3 lg:gap-4 justify-start" data-aos="fade-up" data-aos-delay="1600">
+                <div className="flex gap-3 lg:gap-4 justify-start" data-aos="fade-up" data-aos-delay="1600">
                   {SOCIAL_LINKS.map((social, index) => (
                     <SocialLink key={index} {...social} />
                   ))}
@@ -210,7 +217,7 @@ const Home = () => {
             </div>
 
             {/* Right Column - Optimized Lottie Animation */}
-            <div className="w-full lg:w-[48%] xl:w-[50%] h-[200px] sm:h-[350px] md:h-[400px] lg:h-[500px] xl:h-[600px] 2xl:h-[700px] relative flex items-center justify-center order-1 lg:order-2"
+            <div className="w-full lg:w-[48%] xl:w-[50%] h-[250px] sm:h-[350px] md:h-[400px] lg:h-[500px] xl:h-[600px] 2xl:h-[700px] relative flex items-center justify-center order-2 lg:order-2"
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
               data-aos="fade-left"
@@ -219,8 +226,17 @@ const Home = () => {
                 <div className={`absolute inset-0 bg-gradient-to-r from-[#6366f1]/10 to-[#a855f7]/10 rounded-3xl blur-3xl transition-all duration-700 ease-in-out ${isHovering ? "opacity-50 scale-105" : "opacity-20 scale-100"}`}>
                 </div>
 
-                <div className={`relative z-10 w-full h-full opacity-90 transform transition-transform duration-500 ${isHovering ? "scale-105" : "scale-100"}`}>
-                  <DotLottieReact {...lottieOptions} />
+                <div className={`relative z-10 w-full h-full flex items-center justify-center opacity-90 transition-transform duration-500 ${isHovering ? "scale-110 rotate-2" : "scale-100"}`}>
+                  {!lottieError ? (
+                    <DotLottieReact {...lottieOptions} />
+                  ) : (
+                    <div className="flex items-center justify-center w-full h-full">
+                      <div className="text-center">
+                        <div className="text-6xl mb-4">💻</div>
+                        <p className="text-gray-400 text-sm">Animation Loading...</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className={`absolute inset-0 pointer-events-none transition-all duration-700 ${isHovering ? "opacity-50" : "opacity-20"}`}>
