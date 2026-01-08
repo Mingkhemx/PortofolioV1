@@ -1,11 +1,36 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import viteCompression from 'vite-plugin-compression'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    viteCompression({
+      algorithm: 'gzip',
+      ext: '.gz',
+    })
+  ],
   server: {
     port: 9999,
     host: true
+  },
+  build: {
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom', 'framer-motion'],
+          ui: ['@mui/material', '@mui/icons-material', 'lucide-react', 'aos']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
   }
 })

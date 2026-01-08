@@ -1,27 +1,37 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useState } from 'react';
 import "./index.css";
-import Home from "./Pages/Home";
-import About from "./Pages/About";
-import AnimatedBackground from "./components/Background";
-import Navbar from "./components/Navbar";
-import Portofolio from "./Pages/Portofolio";
-import ContactPage from "./Pages/Contact";
-import ProjectDetails from "./components/ProjectDetail";
-import WelcomeScreen from "./Pages/WelcomeScreen";
 import { AnimatePresence } from 'framer-motion';
+import { lazy, Suspense } from 'react';
+
+const Home = lazy(() => import("./Pages/Home"));
+const About = lazy(() => import("./Pages/About"));
+const AnimatedBackground = lazy(() => import("./components/Background"));
+const Navbar = lazy(() => import("./components/Navbar"));
+const Portofolio = lazy(() => import("./Pages/Portofolio"));
+const ContactPage = lazy(() => import("./Pages/Contact"));
+const ProjectDetails = lazy(() => import("./components/ProjectDetail"));
+const WelcomeScreen = lazy(() => import("./Pages/WelcomeScreen"));
+
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-screen bg-[#030014]">
+    <div className="w-16 h-16 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+);
 
 const LandingPage = ({ showWelcome, setShowWelcome }) => {
   return (
     <>
       <AnimatePresence mode="wait">
         {showWelcome && (
-          <WelcomeScreen onLoadingComplete={() => setShowWelcome(false)} />
+          <Suspense fallback={<LoadingSpinner />}>
+            <WelcomeScreen onLoadingComplete={() => setShowWelcome(false)} />
+          </Suspense>
         )}
       </AnimatePresence>
 
       {!showWelcome && (
-        <>
+        <Suspense fallback={<LoadingSpinner />}>
           <Navbar />
           <AnimatedBackground />
           <Home />
@@ -40,7 +50,7 @@ const LandingPage = ({ showWelcome, setShowWelcome }) => {
               </span>
             </center>
           </footer>
-        </>
+        </Suspense>
       )}
     </>
   );
@@ -48,7 +58,9 @@ const LandingPage = ({ showWelcome, setShowWelcome }) => {
 
 const ProjectPageLayout = () => (
   <>
-    <ProjectDetails />
+    <Suspense fallback={<LoadingSpinner />}>
+      <ProjectDetails />
+    </Suspense>
     <footer>
       <center>
         <hr className="my-3 border-gray-400 opacity-15 sm:mx-auto lg:my-6 text-center" />
