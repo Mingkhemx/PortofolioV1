@@ -170,9 +170,9 @@ const Home = () => {
     <div className="min-h-screen bg-[#030014] overflow-hidden" id="Home">
       <div className={`relative z-10 transition-all duration-1000 ${isLoaded ? "opacity-100" : "opacity-0"}`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 min-h-screen">
-          <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between min-h-screen py-6 sm:py-12 lg:py-20 gap-4 sm:gap-6 lg:gap-10 xl:gap-16">
+          <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between min-h-screen pt-32 sm:pt-36 lg:pt-0 pb-8 sm:pb-12 lg:pb-0 gap-6 sm:gap-10 lg:gap-10 xl:gap-16">
             {/* Left Column */}
-            <div className="w-full lg:w-[48%] xl:w-[45%] space-y-3 sm:space-y-5 lg:space-y-7 text-left order-1 lg:order-1"
+            <div className="w-full lg:w-[35%] xl:w-[30%] space-y-3 sm:space-y-5 lg:space-y-7 text-left order-1 lg:order-1"
               data-aos="fade-right"
               data-aos-delay="200">
               <div className="space-y-3 sm:space-y-4 lg:space-y-6">
@@ -217,7 +217,7 @@ const Home = () => {
             </div>
 
             {/* Right Column - Optimized Lottie Animation */}
-            <div className="w-full lg:w-[48%] xl:w-[50%] h-[250px] sm:h-[350px] md:h-[400px] lg:h-[500px] xl:h-[600px] 2xl:h-[700px] relative flex items-center justify-center order-2 lg:order-2"
+            <div className="w-full lg:w-[60%] xl:w-[65%] h-[500px] sm:h-[600px] md:h-[700px] lg:h-[800px] xl:h-[900px] 2xl:h-[1000px] relative flex items-center justify-center lg:justify-end order-2 lg:order-2"
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
               data-aos="fade-left"
@@ -226,7 +226,7 @@ const Home = () => {
                 <div className={`absolute inset-0 bg-gradient-to-r from-[#6366f1]/10 to-[#a855f7]/10 rounded-3xl blur-3xl transition-all duration-700 ease-in-out ${isHovering ? "opacity-50 scale-105" : "opacity-20 scale-100"}`}>
                 </div>
 
-                <div className={`relative z-10 w-full h-full flex items-center justify-center opacity-90 transition-transform duration-500 ${isHovering ? "scale-110 rotate-2" : "scale-100"}`}>
+                <div className={`relative z-10 w-full h-full flex items-center justify-center lg:justify-end opacity-90 transition-transform duration-500 ${isHovering ? "scale-[1.65] rotate-2 lg:translate-x-12" : "scale-[1.5] lg:translate-x-10"}`}>
                   {!lottieError ? (
                     <DotLottieReact {...lottieOptions} />
                   ) : (
