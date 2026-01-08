@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, memo } from "react"
 import { Github, Linkedin, Mail, ExternalLink, Instagram, Sparkles } from "lucide-react"
-import { DotLottieReact } from '@lottiefiles/dotlottie-react'
+import catCoding from "../components/images/cat-coding.gif"
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
@@ -93,7 +93,7 @@ const Home = () => {
   const [charIndex, setCharIndex] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
-  const [lottieError, setLottieError] = useState(false)
+
 
   // Optimize AOS initialization
   useEffect(() => {
@@ -143,27 +143,7 @@ const Home = () => {
     return () => clearTimeout(timeout);
   }, [handleTyping]);
 
-  // Lottie configuration - Using local file for better reliability
-  const lottieOptions = {
-    src: "https://lottiefiles-public.s3.amazonaws.com/private_files/lf30_WdTEui.json",
-    loop: true,
-    autoplay: true,
-    speed: 1,
-    style: {
-      width: "100%",
-      height: "100%",
-      objectFit: "contain"
-    },
-    className: `transition-all duration-500`,
-    onLoadError: () => {
-      console.error("Failed to load Lottie animation from /Lottie.json");
-      setLottieError(true);
-    },
-    onLoad: () => {
-      console.log("Lottie animation loaded successfully from /Lottie.json");
-      setLottieError(false);
-    }
-  };
+
 
 
   return (
@@ -217,7 +197,7 @@ const Home = () => {
             </div>
 
             {/* Right Column - Optimized Lottie Animation */}
-            <div className="w-full lg:w-[60%] xl:w-[65%] h-[500px] sm:h-[600px] md:h-[700px] lg:h-[800px] xl:h-[900px] 2xl:h-[1000px] relative flex items-center justify-center lg:justify-end order-2 lg:order-2"
+            <div className="w-full lg:w-[60%] xl:w-[65%] h-[500px] sm:h-[600px] md:h-[700px] lg:h-[800px] xl:h-[900px] 2xl:h-[1000px] relative flex items-center justify-center lg:justify-end lg:pr-12 order-2 lg:order-2"
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
               data-aos="fade-left"
@@ -226,17 +206,8 @@ const Home = () => {
                 <div className={`absolute inset-0 bg-gradient-to-r from-[#6366f1]/10 to-[#a855f7]/10 rounded-3xl blur-3xl transition-all duration-700 ease-in-out ${isHovering ? "opacity-50 scale-105" : "opacity-20 scale-100"}`}>
                 </div>
 
-                <div className={`relative z-10 w-full h-full flex items-center justify-center lg:justify-end opacity-90 transition-transform duration-500 ${isHovering ? "scale-[1.65] rotate-2 lg:translate-x-12" : "scale-[1.5] lg:translate-x-10"}`}>
-                  {!lottieError ? (
-                    <DotLottieReact {...lottieOptions} />
-                  ) : (
-                    <div className="flex items-center justify-center w-full h-full">
-                      <div className="text-center">
-                        <div className="text-6xl mb-4">💻</div>
-                        <p className="text-gray-400 text-sm">Animation Loading...</p>
-                      </div>
-                    </div>
-                  )}
+                <div className={`relative z-10 w-full h-full flex items-center justify-center lg:justify-end opacity-90 transition-transform duration-500 ${isHovering ? "scale-105 rotate-2" : "scale-100"}`}>
+                  <img src={catCoding} alt="Coding Animation" className="w-[80%] h-auto lg:w-[90%] max-w-[350px] sm:max-w-[450px] lg:max-w-[500px] object-contain" />
                 </div>
 
                 <div className={`absolute inset-0 pointer-events-none transition-all duration-700 ${isHovering ? "opacity-50" : "opacity-20"}`}>
