@@ -145,7 +145,7 @@ const Home = () => {
 
   // Lottie configuration - Using local file for better reliability
   const lottieOptions = {
-    src: "/Lottie.json",
+    src: "https://lottie.host/58753882-bb6a-49f5-a2c0-950eda1e135a/NLbpVqGegK.lottie",
     loop: true,
     autoplay: true,
     speed: 1,
