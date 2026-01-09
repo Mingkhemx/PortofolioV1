@@ -76,6 +76,9 @@ const ProjectPageLayout = () => (
   </>
 );
 
+const Dashboard = lazy(() => import("./Pages/Admin/Dashboard"));
+const Login = lazy(() => import("./Pages/Admin/Login"));
+
 function App() {
   const [showWelcome, setShowWelcome] = useState(true);
 
@@ -84,6 +87,16 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage showWelcome={showWelcome} setShowWelcome={setShowWelcome} />} />
         <Route path="/project/:id" element={<ProjectPageLayout />} />
+        <Route path="/admin" element={
+          <Suspense fallback={<LoadingSpinner />}>
+            <Login />
+          </Suspense>
+        } />
+        <Route path="/admin/dashboard" element={
+          <Suspense fallback={<LoadingSpinner />}>
+            <Dashboard />
+          </Suspense>
+        } />
       </Routes>
     </BrowserRouter>
   );

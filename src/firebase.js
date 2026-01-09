@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore"
-import { collection, addDoc, getDocs } from "@firebase/firestore"; // Perbarui ini
+import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 
 // Your web app's Firebase configuration
@@ -13,10 +14,10 @@ const firebaseConfig = {
   messagingSenderId: "67331128231",
   appId: "1:67331128231:web:a809947822783d07035482",
   measurementId: "G-X3GPEB0FDK"
- };
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-export { db, collection, addDoc };
+export const db = getFirestore(app);
+export const auth = getAuth(app);
+export const storage = getStorage(app);
