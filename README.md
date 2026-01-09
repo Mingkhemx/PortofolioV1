@@ -1,4 +1,5 @@
-# 🚀 Website Portofolio Profesional dengan Sentuhan AI
+# 🚀 Website Portofolio Profesional
+
 
 ![Preview Portofolio](src/components/images/home.png)
 
