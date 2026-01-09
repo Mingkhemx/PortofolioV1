@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { db, collection } from "../firebase";
-import { getDocs } from "firebase/firestore";
+import { db } from "../firebase";
+import { getDocs, collection } from "firebase/firestore";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
@@ -196,7 +196,7 @@ export default function FullWidthTabs() {
           </span>
         </h2>
         <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base mt-2">
-          Explore my journey through projects, certifications, and technical expertise. 
+          Explore my journey through projects, certifications, and technical expertise.
           Each section represents a milestone in my continuous learning path.
         </p>
       </div>
